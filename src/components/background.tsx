@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import mdark from '../assets/images/bg-mobile-dark.jpg'
 import mlight from '../assets/images/bg-mobile-light.jpg'
 import ddark from '../assets/images/bg-desktop-dark.jpg'
