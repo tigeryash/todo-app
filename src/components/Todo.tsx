@@ -2,17 +2,31 @@ import React, { useState } from 'react'
 import { Todo } from '../types'
 import check from '../assets/images/icon-check.svg'
 import Cross from '../assets/images/icon-cross.svg'
+import {useSelector} from 'react-redux'
+import { RootState } from '../state/store'
+import { DraggableProvidedDraggableProps, DraggableProvidedDragHandleProps } from 'react-beautiful-dnd'
 
 interface TodoProps {
     todo: Todo;
-    onToggleTodo: (id: number) => void;
-    onRemoveTodo: (id: number) => void;
+    onToggleTodo: (id: string) => void;
+    onRemoveTodo: (id: string) => void;
+    innerRef: (element: HTMLLIElement | null) => void;
+    draggableProps: DraggableProvidedDraggableProps;
+    dragHandleProps: DraggableProvidedDragHandleProps | null | undefined;
+    
 }
 
-const TodoItem: React.FC<TodoProps> = ({todo, onRemoveTodo, onToggleTodo}) => {
+const TodoItem: React.FC<TodoProps> = ({todo, onRemoveTodo, onToggleTodo, innerRef, draggableProps, dragHandleProps}) => {
      const [pressed, setPressed] = useState<boolean>(todo.completed)
+     const isLightMode = useSelector((state: RootState) => state.theme.isLightMode)
   return (
-    <li className='todo' key={todo.id}>
+    <li 
+        className={`todo ${isLightMode ? 'todo-dark' : 'todo-light'}`} 
+        ref={innerRef} 
+        key={todo.id}
+        {...draggableProps} 
+        {...dragHandleProps}
+    >
         <div className='left'>
             <button 
                 className='complete-icon'
@@ -25,8 +39,10 @@ const TodoItem: React.FC<TodoProps> = ({todo, onRemoveTodo, onToggleTodo}) => {
                 <img style={{visibility: pressed ? 'visible' : 'hidden' }} src={check} />
             </button>
             <span 
-                className='text'
-                style={{textDecoration: todo.completed ? 'line-through' : 'none'}}
+                className={`text ${isLightMode ? 'text-dark' : 'text-light'}`}
+                style={{textDecoration: todo.completed ? 'line-through' : 'none',
+                        color: todo.completed ? isLightMode ? 'hsl(233, 11%, 84%)' : '' : ''
+                    }}
             >
                 {todo.text}
             </span>
