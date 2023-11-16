@@ -9,10 +9,22 @@ import { Todo } from './types';
 import { v4 as uuidv4 } from 'uuid';
 import {useSelector} from 'react-redux'
 import { RootState } from './state/store'
+import data from './data.json'
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([])
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const saved = localStorage.getItem('todos')
+    if(saved){
+      return JSON.parse(saved)
+    }else{
+      return data
+    }
+  })
   const isLightMode = useSelector((state: RootState) => state.theme.isLightMode)
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   useEffect(() => {
     if (!isLightMode) {
@@ -47,10 +59,14 @@ function App() {
 
   return (
     <>
-      <Header />
       <Background />
-      <Input onAddTodo={addTodo}/>
-      <Todos todos={todos} setTodos={setTodos} onToggleTodo={toggleTodo} onRemoveTodo={removeTodo}  />
+      <div className='container'>
+        <Header />
+        <Input onAddTodo={addTodo}/>
+        <Todos todos={todos} setTodos={setTodos} onToggleTodo={toggleTodo} onRemoveTodo={removeTodo}  />
+
+        <p className='instructions'>Drag and dop to reorder list</p>
+      </div>
     </>
   )
 }

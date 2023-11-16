@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Todo } from '../types'
 import TodoItem from './Todo';
+import {useSelector} from 'react-redux'
+import { RootState } from '../state/store'
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 
 interface TodosProps {
@@ -11,18 +13,31 @@ interface TodosProps {
 }
 
 const Todos: React.FC<TodosProps> = ({todos, setTodos, onRemoveTodo, onToggleTodo}) => {
-  const [filter, setFilter] = React.useState<Todo[]>(todos)
+  const [filter, setFilter] = useState<Todo[]>(todos)
+  const [state, setState] = useState<string>('all')
+  const isLightMode = useSelector((state: RootState) => state.theme.isLightMode)
+
 
   useEffect(() => {
-    setFilter(todos)
-  }, [todos])
+    let newFilteredTodos
+    if(state === 'completed'){
+        newFilteredTodos = todos.filter(todo => todo.completed)
+    }else if(state === 'active'){
+        newFilteredTodos = todos.filter(todo => !todo.completed)
+    }else{
+        newFilteredTodos = todos
+    }
+    setFilter(newFilteredTodos)
+  }, [todos, state])
 
   const Active = () => {
     setFilter(todos.filter(todo => todo.completed === false))
+    setState('active')
   }
 
   const Completed = () => {
     setFilter(todos.filter(todo => todo.completed === true))
+    setState('completed')
   }
 
   const clearCompleted = () => {
@@ -32,6 +47,7 @@ const Todos: React.FC<TodosProps> = ({todos, setTodos, onRemoveTodo, onToggleTod
 
   const all = () => {
     setFilter(todos)
+    setState('all')
   } 
 
   const handleDragEnd = (results:DropResult) => {
@@ -89,15 +105,20 @@ const Todos: React.FC<TodosProps> = ({todos, setTodos, onRemoveTodo, onToggleTod
           )}
         </Droppable>
       </DragDropContext>
-      <div className='todo bottom'>
-          <p>{filter.length} items left</p>
-          <button onClick={clearCompleted}>Clear Completed</button>
+      <div className={`todo bottom ${isLightMode ? 'bottom-dark' : 'bottom-light'}`}>
+          <p className='items-m'>{filter.length} items left</p>
+          <button className='completed-m' onClick={clearCompleted}>Clear Completed</button>
       </div>
 
-        <div className='filters'>
-          <button onClick={all}>All</button>
-          <button onClick={Active}>Active</button>
-          <button onClick={Completed}>Completed</button>
+        <div className={`filters ${isLightMode ? 'filters-dark' : 'filters-light'}`}>
+          <p className='items-d'>{filter.length} items left</p>
+          <div className='buttons'>
+            <button onClick={all}>All</button>
+            <button onClick={Active}>Active</button>
+            <button onClick={Completed}>Completed</button>
+          </div>
+
+          <button className='completed-d' onClick={clearCompleted}>Clear Completed</button>
         </div>
 
 

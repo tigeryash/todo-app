@@ -10,7 +10,7 @@ const LightModeToggle: React.FC = () => {
     const dispatch = useDispatch()
   return (
         <button className='toggle' onClick={() => dispatch(toggleTheme())}>
-            {isLightMode ? (<img src={light} />): (<img src={dark} />)}
+            {isLightMode ? (<img className='icon' src={light} />): (<img src={dark} />)}
         </button>
     )
 }
