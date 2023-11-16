@@ -38,14 +38,16 @@ const TodoItem: React.FC<TodoProps> = ({todo, onRemoveTodo, onToggleTodo, innerR
             >
                 <img style={{visibility: pressed ? 'visible' : 'hidden' }} src={check} />
             </button>
-            <span 
-                className={`text ${isLightMode ? 'text-dark' : 'text-light'}`}
-                style={{textDecoration: todo.completed ? 'line-through' : 'none',
-                        color: todo.completed ? isLightMode ? 'hsl(233, 11%, 84%)' : '' : ''
-                    }}
-            >
-                {todo.text}
-            </span>
+            <div className='center'>
+                <span 
+                    className={`text ${isLightMode ? 'text-dark' : 'text-light'}`}
+                    style={{textDecoration: todo.completed ? 'line-through' : 'none',
+                            color: todo.completed ? isLightMode ? 'hsl(233, 11%, 84%)' : '' : ''
+                        }}
+                >
+                    {todo.text}
+                </span>
+            </div>
         </div>
         <button 
             className='cross-icon'

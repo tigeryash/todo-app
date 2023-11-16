@@ -145,6 +145,7 @@ header{
 
 .text{
   font-size: .7rem;
+  margin-left: 1rem;
 }
 
 .text-light{
@@ -254,12 +255,8 @@ header{
     width: 30px;
   }
 
-  .input{
+  .input, .todo{
     margin: 0;
-    padding-top: clamp(0.8rem, 0.3429rem + 0.9524vw, 1.2rem);
-    padding-bottom: clamp(0.8rem, 0.3429rem + 0.9524vw, 1.2rem);
-    padding-left: clamp(1rem, 0.5429rem + 0.9524vw, 1.4rem);
-    padding-right: clamp(1rem, 0.5429rem + 0.9524vw, 1.4rem);
   }
 
   .todos{
@@ -277,5 +274,13 @@ header{
     justify-content: space-between;
     margin-top: 0;
   }
+
+  .complete-icon{
+    width: clamp(0.9rem, 0.7239rem + 0.7512vw, 1.4rem);
+    height: clamp(0.9rem, 0.7239rem + 0.7512vw, 1.4rem);
+  }
   
+  text{
+    font-size: clamp(1rem, 0.9296rem + 0.3005vw, 1.2rem);
+  }
 }

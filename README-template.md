@@ -36,15 +36,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![](Screenshot%202023-11-16%20010356.png)
 
 ### Links
 
@@ -52,6 +44,21 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
 ## My process
+
+I looked at the design and figured out how I could make components. I noticed the background changed depending on lightmode state. I used redux toolkit to make a global state for lightmode and used in whenever I needed to know what the isLightMode state was. I could've used themecontext but I chose to practice redux toolkit sine I hadn't used it before. 
+
+setting up todolist
+In App.tsx I made the todos state which is the list of todos a user will add or delete. when initializing the state for the todos it'll check if the user has a todos saved in localstorage already or it'll use the todos predefined in data.json. App.tsx has functions for adding, removing and toggling a todo. 
+
+since I'm using typescript I set the type of the todo in it's own file so I wouldn't need to define it in each place I need to use it. 
+
+I passed to todos state from App.tsx to todos.tsx and the functions.
+
+todos.tsx set's up displaying the bottom part of the site it displays wht todos by mapping through it. There are some filters that need to be implemented. I made another sate which is a copy of todos and depending on what button a using clicks at the bottom the filter will display what todos match it. I made a nother state called "state" to save what the selected filter was. Depending on that slection the useEffect will maintain that filter selection even if a change is made to a single todo. 
+
+drag and drop is implemented in this project. I set an area which i want to make draggable and droppable. handleDragEnd is the function which contains the logic for how I want the drag and drop to work. if it didint move or s outside of the dragdropcontext it won't do anything. If it is moved in a valid way it'll moved the selected todo to where the user places it.
+
+todo.tsx is just structuring the todo with the props passed from todos.tsx from the map. 
 
 ### Built with
 
@@ -61,58 +68,36 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - CSS Grid
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+I learned how to change an image from using the the window.innerwidth to change which background image to use. 
 
-To see how you can add code snippets, see below:
+I learned how to set up and use redux toolkit.
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
+I got more familiar with writing in TypeScript.
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+I learned to implement the library react-beautiful-dnd.
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+I started to use chatgpt/github copilot to ask questions on how to use new technologies. After I had watched tutorials on them just to get 
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+I still want to refine my what I've learned such as continuing to use TypeScript in future projects and redux toolkit. I will also continue to use github copilot to increase my workfow and keep asking it questions to get a better understanding of frontend development
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- [resource 1](https://youtu.be/FJDVKeh7RJI?si=4F81zTTcLGORdWNC) - This helped me learn typescript and use it with react. It was also a good lesson on how to use react-beautiful-dnd and how to make a todolist. It helped me get started on this project. I ended up changing how I structured my components.
+- [resource 2](https://www.youtube.com/watch?v=YJ5EMzyimfc&pp=ygUTZHJhZyBhbmQgZHJvcCByZWFjdA%3D%3D) - This is an niformative tutorial on how to use the library react-beautiful-dnd. It is in depth and easy to understand. I helped me code my todos.tsx 
+- [resource 3](https://www.youtube.com/watch?v=5yEG6GhoJBs&t=1362s&pp=ygUNcmVkdXggdG9vbGtpdA%3D%3D) -
+I watched this tutorial to learn how to use redux toolkit.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- Website - (https://yashwanthvenkatesan.vercel.app/)
+- Frontend Mentor - [@tigeryash](https://www.frontendmentor.io/profile/tigeryash)
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+Thanks github copilot
