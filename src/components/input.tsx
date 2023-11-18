@@ -33,7 +33,7 @@ const Input:React.FC<InputProps> = ({onAddTodo}) => {
             <img style={{visibility: pressed ? 'visible' : 'hidden'}} src={check} />
         </button>
         <input 
-            className='text-field'
+            className={`text-field ${isLightMode ? "text-field-d" : "text-field-l"}`}
             type='text'
             placeholder='Create a new todo...'
             value={inputText}

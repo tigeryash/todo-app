@@ -105,21 +105,22 @@ const Todos: React.FC<TodosProps> = ({todos, setTodos, onRemoveTodo, onToggleTod
           )}
         </Droppable>
       </DragDropContext>
+
       <div className={`todo bottom ${isLightMode ? 'bottom-dark' : 'bottom-light'}`}>
           <p className='items-m'>{filter.length} items left</p>
-          <button className='completed-m' onClick={clearCompleted}>Clear Completed</button>
+          <button className={`completed-m ${isLightMode ? 'completed-dark' : 'completed-light'}`} onClick={clearCompleted}>Clear Completed</button>
       </div>
 
-        <div className={`filters ${isLightMode ? 'filters-dark' : 'filters-light'}`}>
-          <p className='items-d'>{filter.length} items left</p>
-          <div className='buttons'>
-            <button onClick={all}>All</button>
-            <button onClick={Active}>Active</button>
-            <button onClick={Completed}>Completed</button>
-          </div>
-
-          <button className='completed-d' onClick={clearCompleted}>Clear Completed</button>
+      <div className={`filters ${isLightMode ? 'filters-dark' : 'filters-light'}`}>
+        <p className='items-d'>{filter.length} items left</p>
+        <div className='buttons'>
+          <button onClick={all}>All</button>
+          <button onClick={Active}>Active</button>
+          <button onClick={Completed}>Completed</button>
         </div>
+
+        <button className={`completed-d ${isLightMode ? 'completed-dark' : 'completed-light'}`} onClick={clearCompleted}>Clear Completed</button>
+      </div>
 
 
     </section>

@@ -28,7 +28,7 @@ const Background = () => {
         bgClass += ' dark-mode'
     }
     let bgSrc = ''
-    if(screenWidth <= 600){
+    if(screenWidth <= 768){
         bgClass += ' m-bg'
         bgSrc = isLightMode ? mdark : mlight
     }else {
